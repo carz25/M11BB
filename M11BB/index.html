@@ -176,7 +176,7 @@ th.on{color:var(--ink)}
 .mmid{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;font-size:13px;color:var(--mute)}
 .mmid b{font-family:var(--display);font-size:20px;letter-spacing:.08em;color:var(--ink);font-weight:800;text-transform:uppercase}
 .mbody{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px 32px;padding:16px}
-.mbody h4{margin:0 0 10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:500}
+.mbody h4{margin:0 0 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);font-weight:700}
 .cmp{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:2px 12px;padding:7px 0;align-items:baseline}
 .cmp .cv{font-weight:500;font-variant-numeric:tabular-nums;font-size:15px}
 .cmp .cv.h{text-align:right}
@@ -261,6 +261,7 @@ footer p{margin:0;max-width:90ch}
 .m .g,.m .grow>summary{grid-template-columns:64px minmax(0,1fr)}
 .m .gl .sc{font-size:28px}
 .m .gmeta{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center;gap:6px 16px}
+.m .gmeta>span:last-child{margin-left:auto;text-align:right}
 .m .gdetail,.m .mbody,.m .watch{grid-template-columns:minmax(0,1fr)}
 .m .mc>summary{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 .m .mmid{grid-column:1/-1;grid-row:1;flex-direction:row;gap:10px;justify-content:center}
@@ -402,12 +403,36 @@ button.hg:hover{border-color:var(--ink)}
 .wkc{flex:none;width:184px;display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:10px 12px;scroll-snap-align:start}
 button.wkc{cursor:pointer}
 button.wkc:hover{border-color:var(--ink)}
+.wph{display:block;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);text-align:right;line-height:1.1}
 .wkd{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
 .wkl{display:flex;align-items:center;gap:8px;min-width:0}
 .wkl b{font-weight:600;font-size:14px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .wkl i{font-style:normal;font-family:var(--display);font-weight:800;font-size:20px}
 .wkl em.wpc{font-style:normal;font-size:13px;font-weight:500;color:var(--mute);font-variant-numeric:tabular-nums}
 .wkl em.wpc.fav{font-family:var(--display);font-weight:800;font-size:19px;color:var(--ink)}
+
+.scout{grid-column:1/-1;border-top:1px solid var(--rule);padding-top:16px;min-width:0}
+.scrg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.scr{border:1px solid var(--rule);border-radius:8px;background:var(--card);padding:12px 14px;min-width:0}
+.scr h5{margin:0 0 8px;font-family:"Big Shoulders Display",sans-serif;font-size:20px;letter-spacing:.02em;text-transform:uppercase}
+.scr h6{margin:10px 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.scr h6.up{color:#1f8a4c}.scr h6.dn{color:#c0392b}
+.scr ul{margin:0;padding:0 0 0 16px;display:grid;gap:5px;font-size:13.5px;line-height:1.45}
+.scr .none{margin:0;font-size:13px;color:var(--mute)}
+.scr .scrwo{margin:12px 0 0;padding-top:10px;border-top:1px dashed var(--rule);font-size:13.5px}
+.keys{margin-top:16px}.scout .mfoot{margin-top:12px}
+.keys ol{margin:0;padding:0 0 0 20px;display:grid;gap:7px;font-size:13.5px;line-height:1.45}
+.keys .none{margin:0;font-size:13px;color:var(--mute)}
+.m .scrg{grid-template-columns:minmax(0,1fr)}
+.mdet{margin-top:10px}
+.mdet>summary{display:inline-flex;align-items:center;list-style:none;cursor:pointer;border:1px solid var(--rule);border-radius:6px;background:var(--card);padding:5px 12px;font-size:12.5px;font-weight:600;color:var(--accent)}
+.mdet>summary::-webkit-details-marker{display:none}
+.mdet>summary:hover{border-color:var(--accent)}
+.mdet .hide{display:none}
+.mdet[open] .show{display:none}
+.mdet[open] .hide{display:inline}
+.mdet[open]>summary{margin-bottom:8px}
+.mdet .wpx{margin:0 0 8px}
 .mf{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:13.5px;line-height:1.45;color:var(--ink)}
 .mf b{font-weight:600}
 .wkl.mine b{box-shadow:0 2px 0 var(--follow-bar)}
@@ -879,7 +904,7 @@ button.wkc:hover{border-color:var(--ink)}
       var day = DOW[pd(g.date).getDay()] + " · " + g.time;
       var wp = g.played ? null : winProb(g.a, g.h);
       var line = function (t, sc, win) { var pc = wp ? (t === g.a ? wp.a : wp.h) : 0, fav = wp && pc === Math.max(wp.a, wp.h) && wp.a !== wp.h; return '<span class="wkl' + (mine(t) ? " mine" : "") + (g.played && !win ? " lose" : "") + '">' + badge(t).replace(/alt="[^"]*"/, 'alt=""') + "<b>" + esc(SHORT[t]) + "</b>" + (g.played ? "<i>" + sc + "</i>" : '<em class="wpc' + (fav ? " fav" : "") + '" title="Win probability">' + pc + "%</em>") + "</span>"; };
-      var inner = '<span class="wkd">' + day + "</span>" + line(g.a, g.sa, g.sa >= g.sh) + line(g.h, g.sh, g.sh >= g.sa);
+      var inner = '<span class="wkd">' + day + "</span>" + (g.played ? "" : '<span class="wph">Win prediction</span>') + line(g.a, g.sa, g.sa >= g.sh) + line(g.h, g.sh, g.sh >= g.sa);
       return g.played ? '<div class="wkc done">' + inner + '<span class="wkf">Final</span></div>' : '<button class="wkc" data-open="' + g.id + '" aria-label="' + esc(SHORT[g.a]) + ' at ' + esc(SHORT[g.h]) + ', win probability ' + wp.a + ' to ' + wp.h + ' percent, tie ' + wp.t + ' percent">' + inner + '<span class="wkf">Tie ' + wp.t + '% · Preview →</span></button>';
     }).join("");
     return '<div class="wk"><div class="wkh"><h3>This weekend</h3><span>' + dlong(w[0]) + " – " + dlong(w[1]) + " · " + list.length + " game" + (list.length === 1 ? "" : "s") + (state.team === "ALL" ? "" : " for " + esc(SHORT[state.team])) + '</span></div><div class="wkrow">' + cards + "</div></div>";
@@ -891,7 +916,7 @@ button.wkc:hover{border-color:var(--ink)}
     return '<span class="wkl' + (g.played && !win ? " lose" : "") + '">' + badge(t) + '<b data-tp="' + t + '">' + esc(SHORT[t]) + "</b>" + pc + "</span>";
   }
   function homeGame(g) {
-    var inner = '<span class="hd">' + (g.played ? dshort(g.date) : dshort(g.date)) + "<small>" + (g.played ? "Final" : g.time) + '</small></span><span class="hls">' + hLine(g, g.a, g.sa >= g.sh) + hLine(g, g.h, g.sh >= g.sa) + "</span>";
+    var inner = '<span class="hd">' + (g.played ? dshort(g.date) : dshort(g.date)) + "<small>" + (g.played ? "Final" : g.time) + '</small></span><span class="hls">' + (g.played ? "" : '<span class="wph">Win prediction</span>') + hLine(g, g.a, g.sa >= g.sh) + hLine(g, g.h, g.sh >= g.sa) + "</span>";
     return g.played ? '<div class="hg">' + inner + "</div>" : '<button class="hg" data-open="' + g.id + '">' + inner + "</button>";
   }
   function renderHome() {
@@ -1018,7 +1043,7 @@ button.wkc:hover{border-color:var(--ink)}
     return '<div class="' + cls + '">' + tname(t) + (g.played ? '<span class="sc">' + sc + "</span>" : pc) + "</div>";
   }
   function gameInner(g, sheet) {
-    return '<div class="gtime"><b>' + g.time + "</b><span>#" + g.id + '</span></div><div class="gteams">' + teamLine(g, "a") + teamLine(g, "h") + '</div><div class="gmeta"><span>' + esc(g.venue) + "</span>" +
+    return '<div class="gtime"><b>' + g.time + "</b><span>#" + g.id + '</span></div><div class="gteams">' + (g.played ? "" : '<div class="wph">Win prediction</div>') + teamLine(g, "a") + teamLine(g, "h") + '</div><div class="gmeta"><span>' + esc(g.venue) + "</span>" +
       (g.played ? '<span><span class="final">Final</span>' + (sheet ? ' · <span class="more">Scoring summary</span>' : "") + "</span>" : '<span><span class="more">Matchup preview</span></span>') + "</div>";
   }
   function goalList(sh, t) {
@@ -1357,23 +1382,103 @@ function makeModel(played, sheets, teams, opt) {
   function winProb(a, h) { var p = MODEL.predict(a, h); return { a: p.a, h: p.h, t: p.t, la: p.la, lh: p.lh, full: p }; }
   function pctDiff(x) { var d = Math.round((x - 1) * 100); return (d > 0 ? "+" : "") + d + "%"; }
   function modelNotes(g, wp) {
-    var p = wp.full, A = SHORT[g.a], H = SHORT[g.h], li = [], gp = Math.min(ST[g.a].gp, ST[g.h].gp);
-    li.push("<li><b>Ratings.</b> Opponent-adjusted scoring (1.00 is league average, higher attack and lower defence are better): " + esc(A) + " attack " + p.att[0].toFixed(2) + ", defence " + p.def[0].toFixed(2) + "; " + esc(H) + " attack " + p.att[1].toFixed(2) + ", defence " + p.def[1].toFixed(2) + ". Recent games count more, with a four week half-life.</li>");
-    li.push("<li><b>Power ranking.</b> " + esc(A) + " " + ord(ELORANK.indexOf(g.a) + 1) + " (" + Math.round(p.elo[0]) + "), " + esc(H) + " " + ord(ELORANK.indexOf(g.h) + 1) + " (" + Math.round(p.elo[1]) + "). An Elo style rating that rewards beating strong teams and bigger margins.</li>");
+    var p = wp.full, A = SHORT[g.a], H = SHORT[g.h], li = [], hid = [], gp = Math.min(ST[g.a].gp, ST[g.h].gp);
+    hid.push("<li><b>Ratings.</b> Opponent-adjusted scoring (1.00 is league average, higher attack and lower defence are better): " + esc(A) + " attack " + p.att[0].toFixed(2) + ", defence " + p.def[0].toFixed(2) + "; " + esc(H) + " attack " + p.att[1].toFixed(2) + ", defence " + p.def[1].toFixed(2) + ". Recent games count more, with a four week half-life.</li>");
+    hid.push("<li><b>Power ranking.</b> " + esc(A) + " " + ord(ELORANK.indexOf(g.a) + 1) + " (" + Math.round(p.elo[0]) + "), " + esc(H) + " " + ord(ELORANK.indexOf(g.h) + 1) + " (" + Math.round(p.elo[1]) + "). An Elo style rating that rewards beating strong teams and bigger margins.</li>");
     [[g.a, 0], [g.h, 1]].forEach(function (x) {
       var inf = p.info[x[1]], t = x[0], bits = [];
       if (Math.abs(inf.lin - 1) >= 0.02) bits.push("its last lineup scores about " + pctDiff(inf.lin).replace("-", "") + (inf.lin > 1 ? " more" : " less") + " than its usual group");
       if (inf.goalie && Math.abs(inf.gk - 1) >= 0.02) bits.push("goalie " + esc(nm(t, inf.goalie)) + " has allowed " + (inf.gk < 1 ? "fewer" : "more") + " goals than the team's goalie average");
       else if (inf.goalie) bits.push("goalie " + esc(nm(t, inf.goalie)) + " started last");
-      if (bits.length) var txt = bits.join("; "); li.push("<li><b>" + esc(SHORT[t]) + " players.</b> " + txt.charAt(0).toUpperCase() + txt.slice(1) + ".</li>");
+      if (bits.length) var txt = bits.join("; "); hid.push("<li><b>" + esc(SHORT[t]) + " players.</b> " + txt.charAt(0).toUpperCase() + txt.slice(1) + ".</li>");
     });
     if (p.h2h.n) { var m = p.h2h.m; li.push("<li><b>Head to head.</b> " + (p.h2h.n === 1 ? "They have met once" : "They have met " + p.h2h.n + " times") + " this season: " + (m === 0 ? "even" : esc(m > 0 ? A : H) + " by " + Math.abs(Math.round(m * 10) / 10) + " goal" + (Math.abs(m) === 1 ? "" : "s") + " per game") + ". Used lightly.</li>"); }
     li.push("<li><b>Confidence.</b> " + (gp < 6 ? "Low" : gp < 9 ? "Moderate" : "Good") + ". The fewest games played is " + gp + ", so one result can move these numbers.</li>");
-    return '<ul class="mf">' + li.join("") + "</ul>";
+    var det = '<details class="mdet"><summary><span class="show">Show model details</span><span class="hide">Hide model details</span></summary><p class="wpx">Projected score: ' + esc(A) + " " + f1(wp.la) + ", " + esc(H) + " " + f1(wp.lh) + ". Win chances blend a Poisson goal model (70%) with the power ranking (30%). Ties are possible but rare in this league.</p>" + '<ul class="mf">' + hid.join("") + "</ul></details>";
+    return det + '<ul class="mf">' + li.join("") + "</ul>";
   }
   function favLine(g, wp) {
     var d = wp.a - wp.h;
     return Math.abs(d) < 10 ? "Close game" : (d > 0 ? SHORT[g.a] + " favoured · " + wp.a + "%" : SHORT[g.h] + " favoured · " + wp.h + "%");
+  }
+
+  /* ---------- coach scouting (rule based, from the table and game sheets) ---------- */
+  var PROF = {};
+  function profile(t) {
+    if (PROF[t]) return PROF[t];
+    var N = ORDER.length, rs = results(t), st = ST[t], out = { t: t, str: [], weak: [] };
+    var tops = topSkaters(t, 3), all = SK.filter(function (r) { return r.team === t; }), tg = 0;
+    all.forEach(function (r) { tg += r.g; });
+    var scorers = all.filter(function (r) { return r.g > 0; }).length;
+    var top2 = tops.slice(0, 2).reduce(function (a, r) { return a + r.g + r.a; }, 0);
+    var allpts = all.reduce(function (a, r) { return a + r.g + r.a; }, 0);
+    var share = allpts ? top2 / allpts : 0;
+    var l5 = rs.slice(-5), l5w = l5.filter(function (x) { return x.r === "W"; }).length, l5l = l5.filter(function (x) { return x.r === "L"; }).length;
+    var close = rs.filter(function (x) { return Math.abs(x.us - x.them) <= 1; }), cw = close.filter(function (x) { return x.us > x.them; }).length;
+    var blow = rs.filter(function (x) { return x.them - x.us >= 4; }).length;
+    var gl = topGoalie(t), lgGAA = 0, ng = 0;
+    GK.forEach(function (r) { if (r.min >= 60) { lgGAA += r.gaa; ng++; } }); lgGAA = ng ? lgGAA / ng : 0;
+    var rk = RK, top = N <= 6 ? 2 : 3, bot = N - top + 1;
+    function add(arr, key, txt, hint) { arr.push({ k: key, txt: txt, hint: hint }); }
+    if (rk.gfg[t] <= top) add(out.str, "off", "<b>Offence.</b> " + f2(st.gfg) + " goals per game, " + ord(rk.gfg[t]) + " in the conference.", "off");
+    if (rk.gfg[t] >= bot) add(out.weak, "off", "<b>Scoring.</b> Only " + f2(st.gfg) + " goals per game, " + ord(rk.gfg[t]) + " of " + N + ".", "off");
+    if (rk.gag[t] <= top) add(out.str, "def", "<b>Defence.</b> Allows " + f2(st.gag) + " per game, " + ord(rk.gag[t]) + " fewest.", "def");
+    if (rk.gag[t] >= bot) add(out.weak, "def", "<b>Defence.</b> Allows " + f2(st.gag) + " per game, " + ord(rk.gag[t]) + " of " + N + ". Chances against are getting through.", "def");
+    if (gl && gl.gp >= 3 && lgGAA) {
+      if (gl.gaa <= lgGAA * 0.85) add(out.str, "gk", "<b>Goaltending.</b> " + esc(gl.name) + " has a " + f2(gl.gaa) + " GAA over " + gl.gp + " games" + (gl.so ? " with " + gl.so + " shutout" + (gl.so > 1 ? "s" : "") : "") + ".", "gk");
+      else if (gl.gaa >= lgGAA * 1.15) add(out.weak, "gk", "<b>Goaltending.</b> " + esc(gl.name) + " is at " + f2(gl.gaa) + " GAA, above the league average of " + f2(lgGAA) + ".", "gk");
+    }
+    if (rk.pimg[t] <= top) add(out.str, "pim", "<b>Discipline.</b> " + f1(st.pimg) + " penalty minutes per game, " + ord(rk.pimg[t]) + " cleanest.", "pim");
+    if (rk.pimg[t] >= bot) add(out.weak, "pim", "<b>Discipline.</b> " + f1(st.pimg) + " penalty minutes per game, " + ord(rk.pimg[t]) + " of " + N + ". Power plays for the opponent are likely.", "pim");
+    if (l5.length >= 4) {
+      if (l5w >= 4) add(out.str, "form", "<b>Form.</b> " + l5w + " wins in the last " + l5.length + " games.", "form");
+      if (l5l >= 3) add(out.weak, "form", "<b>Form.</b> " + l5l + " losses in the last " + l5.length + " games.", "form");
+    }
+    if (tg >= 12 && scorers >= 8) add(out.str, "dep", "<b>Depth.</b> " + scorers + " different players have scored, so no single line to shut down.", "dep");
+    if (tg >= 12 && share >= 0.5) add(out.weak, "dep", "<b>Reliance on two players.</b> " + esc(tops[0].name) + " and " + esc(tops[1].name) + " are involved in " + Math.round(share * 100) + "% of the points on record.", "rely");
+    if (close.length >= 3) {
+      if (cw / close.length >= 0.67) add(out.str, "cls", "<b>Close games.</b> " + cw + " wins in " + close.length + " one-goal games.", "cls");
+      else if (cw / close.length <= 0.25) add(out.weak, "cls", "<b>Close games.</b> Only " + cw + " wins in " + close.length + " one-goal games.", "cls");
+    }
+    if (blow >= 2) add(out.weak, "blow", "<b>Lopsided losses.</b> Beaten by 4 or more goals " + blow + " times.", "blow");
+    out.tops = tops; out.gl = gl; out.share = share; out.l5 = l5; out.rs = rs;
+    return (PROF[t] = out);
+  }
+  function keysFor(a, h) {
+    var A = profile(a), H = profile(h), k = [], sa = SHORT[a], sh = SHORT[h];
+    var has = function (p, side, key) { return p[side].some(function (x) { return x.k === key; }); };
+    [[a, h, A, H], [h, a, H, A]].forEach(function (x) {
+      var me = x[2], op = x[3], mn = SHORT[x[0]], on = SHORT[x[1]];
+      if (has(op, "weak", "def") && (has(me, "str", "off") || ST[x[0]].gfg >= MODEL.LG)) k.push("<b>" + esc(mn) + " should test " + esc(on) + " early.</b> " + esc(on) + " have been leaking goals (" + f2(ST[x[1]].gag) + " per game), so shots and traffic in front are the best route.");
+      if (has(me, "weak", "pim") && ST[x[1]].pimg < ST[x[0]].pimg - 1) k.push("<b>" + esc(mn) + " must stay out of the box.</b> " + esc(on) + " will get chances on the power play if " + esc(mn) + " keep taking penalties.");
+      if (has(me, "weak", "rely") && me.tops.length) k.push("<b>Shut down " + esc(me.tops[0].name) + ".</b> " + mn + "'s top scorer (" + me.tops[0].g + "G " + me.tops[0].a + "A) drives their offence. " + esc(on) + " should match their best checkers against that group.");
+    });
+    var ra = ST[a].gfg + ST[h].gfg, rd = ST[a].gag + ST[h].gag;
+    var gl = (ST[a].gfg + ST[h].gfg) / 2;
+    if ((ST[a].gag + ST[h].gag) / 2 < MODEL.LG * 0.85 * 1 && gl < MODEL.LG * 1.05) k.push("<b>Expect a low-scoring game.</b> Both teams defend well, so the first goal and special teams carry extra weight.");
+    else if ((ST[a].gag + ST[h].gag) / 2 > MODEL.LG * 1.15) k.push("<b>Expect goals.</b> Both teams are giving up a lot, so a quick response after conceding matters more than holding a lead.");
+    [[a, A], [h, H]].forEach(function (x) {
+      var oth = x[0] === a ? H : A;
+      if (has(x[1], "str", "gk") && x[1].gl) k.push("<b>Be patient against " + esc(x[1].gl.name) + ".</b> " + f2(x[1].gl.gaa) + " GAA, so avoid forcing low-percentage shots and look for rebounds and screens.");
+    });
+    var st = function (p, who) { var rs = p.rs, n = 0, last = rs.length ? rs[rs.length - 1].r : ""; for (var i = rs.length - 1; i >= 0 && rs[i].r === last; i--) n++; if (n >= 3 && last === "W") k.push("<b>" + esc(who) + " arrive on a " + n + "-game win streak.</b> Confidence is high, so a strong first period from the other side matters."); if (n >= 3 && last === "L") k.push("<b>" + esc(who) + " have lost " + n + " straight.</b> A first goal can change how this game feels, so prepare for a desperate start."); };
+    st(A, sa); st(H, sh);
+    var s = MODEL.predict(a, h), d = Math.abs(s.a - s.h);
+    if (d < 10) k.push("<b>This is close to a coin flip.</b> Special teams, goaltending and the first goal are likely to decide it.");
+    return k.slice(0, 5);
+  }
+  function scoutCard(t, opp) {
+    var P = profile(t), sc = function (arr, empty) { return arr.length ? "<ul>" + arr.slice(0, 4).map(function (x) { return "<li>" + x.txt + "</li>"; }).join("") + "</ul>" : '<p class="none">' + empty + "</p>"; };
+    var look = P.tops.slice(0, 2).map(function (r) { return esc(r.name) + " (" + r.pts + " P)"; }).join(" and ");
+    return '<div class="scr"><h5>' + esc(SHORT[t]) + '</h5><div><h6 class="up">Strengths</h6>' + sc(P.str, "No standout strength yet. Their numbers sit close to the middle of the conference.") +
+      '<h6 class="dn">Weaknesses</h6>' + sc(P.weak, "No clear weakness in the numbers so far.") + "</div>" +
+      (look ? '<p class="scrwo"><b>Watch out for:</b> ' + look + (P.gl ? ". In goal: " + esc(P.gl.name) + "." : ".") + "</p>" : "") + "</div>";
+  }
+  function scoutHTML(g) {
+    var keys = keysFor(g.a, g.h);
+    return '<div class="scout"><h4>Scouting report</h4><div class="scrg">' + scoutCard(g.a, g.h) + scoutCard(g.h, g.a) + "</div>" +
+      '<div class="keys"><h4>Keys to the game</h4>' + (keys.length ? "<ol>" + keys.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ol>" : '<p class="none">No clear mismatch. Both teams profile similarly, so execution and discipline decide it.</p>') + "</div>" +
+      '</div>';
   }
   function matchBody(g) {
     var wp = winProb(g.a, g.h);
@@ -1390,7 +1495,7 @@ function makeModel(played, sheets, teams, opt) {
       cmpRow("Penalty min / GP", A.pimg, H.pimg, f1(A.pimg), f1(H.pimg), "low");
     var small = Math.min(A.gp, H.gp);
     return '<div class="mbody">' + wpBar + '<div class="wp"><h4>Projection</h4>' +
-      '<p class="wpx">Projected score: ' + esc(SHORT[g.a]) + " " + f1(wp.la) + ", " + esc(SHORT[g.h]) + " " + f1(wp.lh) + ". Win chances blend a Poisson goal model (70%) with the power ranking (30%). Ties are possible but rare in this league.</p>" + modelNotes(g, wp) + '</div><div><h4>Team comparison</h4>' + rows + '<div class="vs" style="margin-top:14px"><h4>Offence against defence</h4>' + atk(A, H) + atk(H, A) + "</div></div>" +
+      '' + modelNotes(g, wp) + '</div>' + scoutHTML(g) + '<div><h4>Team comparison</h4>' + rows + '<div class="vs" style="margin-top:14px"><h4>Offence against defence</h4>' + atk(A, H) + atk(H, A) + "</div></div>" +
       '<div class="mside"><div><h4>Recent form</h4><p>' + esc(SHORT[g.a]) + " " + formChips(g.a, 5) + "</p><p>" + esc(SHORT[g.h]) + " " + formChips(g.h, 5) + "</p></div>" +
       "<div>" + seriesBlock(g) + '</div><div class="watch">' + watch(g.a) + watch(g.h) + "</div></div>" +
       '<p class="mfoot">Game #' + g.id + " · " + esc(g.venue) + ". Season stats come from the official table, with only " + small + " to " + Math.max(A.gp, H.gp) + " games played per team, so small samples can swing. Player lines come from available game sheets.</p></div>";
